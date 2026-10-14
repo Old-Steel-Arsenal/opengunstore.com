@@ -1,7 +1,8 @@
 # Builds opengunstore.com: the landing page from this repo, plus the docs at /docs/ built
-# with MkDocs from Old-Steel-Arsenal/opengunstore@main (mkdocs.yml + docs/ live there).
+# with MkDocs from Old-Steel-Arsenal/opengunstore@develop (mkdocs.yml + docs/ live there;
+# develop is that repo's default branch, so the docs follow merges, not releases).
 # Runs on a push here, by hand, and hourly; the hourly run deploys only when the
-# product repo's main has moved since the last deploy.
+# product repo's develop has moved since the last deploy.
 name: pages
 on:
   push:
@@ -26,7 +27,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: Old-Steel-Arsenal/opengunstore
-          ref: main
+          ref: develop
           path: src
           fetch-depth: 0 # page dates come from git history
       - id: changed
@@ -50,7 +51,7 @@ jobs:
           mkdir -p out
           cp index.html favicon.svg out/
           cp -r screenshots out/
-          # Until the docs reach the product repo's main, publish the landing page alone.
+          # Until the docs reach the product repo's develop, publish the landing page alone.
           if [ -f src/mkdocs.yml ]; then
             pip install -q -r src/docs/requirements.txt
             ( cd src && mkdocs build --strict -d ../out/docs )
