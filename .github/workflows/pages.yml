@@ -1,0 +1,72 @@
+# Builds opengunstore.com: the landing page from this repo, plus the docs at /docs/ built
+# with MkDocs from Old-Steel-Arsenal/opengunstore@main (mkdocs.yml + docs/ live there).
+# Runs on a push here, by hand, and hourly; the hourly run deploys only when the
+# product repo's main has moved since the last deploy.
+name: pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "23 * * * *"
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      skip: ${{ steps.changed.outputs.skip }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: Old-Steel-Arsenal/opengunstore
+          ref: main
+          path: src
+          fetch-depth: 0 # page dates come from git history
+      - id: changed
+        name: Skip a scheduled run when nothing moved
+        run: |
+          sha=$(git -C src rev-parse HEAD)
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          live=$(curl -fsS https://opengunstore.com/docs/.source-sha 2>/dev/null || true)
+          if [ "${{ github.event_name }}" = schedule ] && [ "$live" = "$sha" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"; echo "docs already at $sha"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.changed.outputs.skip != 'true'
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      - if: steps.changed.outputs.skip != 'true'
+        name: Build
+        run: |
+          mkdir -p out
+          cp index.html favicon.svg out/
+          cp -r screenshots out/
+          # Until the docs reach the product repo's main, publish the landing page alone.
+          if [ -f src/mkdocs.yml ]; then
+            pip install -q -r src/docs/requirements.txt
+            ( cd src && mkdocs build --strict -d ../out/docs )
+            echo "${{ steps.changed.outputs.sha }}" > out/docs/.source-sha
+          fi
+      - if: steps.changed.outputs.skip != 'true'
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: out
+  deploy:
+    needs: build
+    if: needs.build.outputs.skip != 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
