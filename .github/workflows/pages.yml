@@ -49,7 +49,7 @@ jobs:
         name: Build
         run: |
           mkdir -p out
-          cp index.html favicon.svg out/
+          cp index.html favicon.svg robots.txt sitemap.xml out/
           cp -r screenshots out/
           # Until the docs reach the product repo's develop, publish the landing page alone.
           if [ -f src/mkdocs.yml ]; then

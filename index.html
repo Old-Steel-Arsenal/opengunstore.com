@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>OpenGunstore — The POS for FFL with AI built in</title>
-    <meta name="description" content="Open-source point of sale for FFL dealers: counter, Form 4473, bound book, web store and distributor orders in one system, with a built-in MCP server. GPLv3, self-hosted." />
+    <title>OpenGunstore — Open-Source Gun Store POS for FFL Dealers</title>
+    <meta name="description" content="Open-source gun store POS and FFL software: counter sales, Form 4473, an electronic bound book synced to FastBound, WooCommerce and GunBroker. Self-hosted." />
     <link rel="canonical" href="https://opengunstore.com/" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="OpenGunstore" />
-    <meta property="og:title" content="OpenGunstore — The POS for FFL with AI built in" />
+    <meta property="og:title" content="OpenGunstore — Open-Source Gun Store POS for FFL Dealers" />
     <meta property="og:description" content="Counter, bound book, web store and distributor orders in one system. Open source, self-hosted, with a built-in MCP server." />
     <meta property="og:url" content="https://opengunstore.com/" />
     <meta property="og:image" content="https://opengunstore.com/screenshots/page-dashboard.webp" />
@@ -180,6 +180,24 @@
         .foot { padding: 22px 16px 32px; }
       }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "OpenGunstore",
+      "url": "https://opengunstore.com/",
+      "description": "Open-source point of sale and back office for gun stores and FFL dealers, built on Frappe and ERPNext.",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Point of sale",
+      "operatingSystem": "Linux",
+      "image": "https://opengunstore.com/screenshots/page-dashboard.webp",
+      "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "codeRepository": "https://github.com/Old-Steel-Arsenal/opengunstore",
+      "publisher": { "@type": "Organization", "name": "Old Steel Arsenal", "url": "https://oldsteelarsenal.com/" }
+    }
+    </script>
   </head>
   <body>
     <div class="page">
@@ -202,7 +220,7 @@
           <div class="wrap">
             <div class="herotext">
               <h1 class="h1">The POS for FFL with AI built in</h1>
-              <p class="lead">Counter, bound book, web store and distributor orders in one system.</p>
+              <p class="lead">An open-source gun store POS: counter, bound book, web store and distributor orders in one system.</p>
               <div class="ctas">
                 <a class="btn primary" href="https://github.com/Old-Steel-Arsenal/opengunstore">View on GitHub</a>
                 <a class="btn secondary" href="/docs/self-hosting/">Install guide</a>
@@ -310,7 +328,7 @@
         <section class="sec" id="features">
           <div class="wrap">
             <h2 class="h2">Features</h2>
-            <p class="body">In daily use at an independent FFL dealer. Built on Frappe and ERPNext v16.</p>
+            <p class="body">In daily use at <a href="https://oldsteelarsenal.com/" style="text-decoration:underline">Old Steel Arsenal</a>, an independent FFL dealer in Plano, Texas. Built on Frappe and ERPNext v16.</p>
             <div class="shots">
               <a class="shotcard" href="/screenshots/pos-terminal.webp"><img class="shotimg" src="/screenshots/pos-terminal.webp" loading="lazy" alt="Point of Sale" /><span class="shotcap">Point of Sale</span></a>
               <a class="shotcard" href="/screenshots/page-storage-map.webp"><img class="shotimg" src="/screenshots/page-storage-map.webp" loading="lazy" alt="Storage Locations" /><span class="shotcap">Storage Locations</span></a>
@@ -320,7 +338,7 @@
             <div class="featgrid">
               <div class="feat"><span class="featn">Counter</span><span class="featd">Serial picking, license scanning, order queues</span></div>
               <div class="feat"><span class="featn">Form 4473</span><span class="featd">Sale is blocked until the 4473 is complete and NICS says Proceed</span></div>
-              <div class="feat"><span class="featn">Bound book</span><span class="featd">Synced to FastBound</span></div>
+              <div class="feat"><span class="featn">Bound book</span><span class="featd">Electronic bound book, synced to FastBound</span></div>
               <div class="feat"><span class="featn">Payments</span><span class="featd">Payroc terminals, split payments, daily reconciliation</span></div>
               <div class="feat"><span class="featn">Web and auction</span><span class="featd">WooCommerce and GunBroker from one inventory</span></div>
               <div class="feat"><span class="featn">Distributors</span><span class="featd">RSR and Sports South ordering and drop-ship</span></div>
@@ -343,7 +361,7 @@
 
       <footer class="foot">
         <a class="logo" href="#top"><span class="mkc" aria-hidden="true"><span class="gl">G</span><span class="gdot"></span></span><span>OpenGunstore</span></a>
-        <span>GPLv3 · © 2026 Old Steel Arsenal</span>
+        <span>GPLv3 · © 2026 <a href="https://oldsteelarsenal.com/">Old Steel Arsenal</a></span>
         <div class="footlinks">
           <a class="footlink" href="https://github.com/Old-Steel-Arsenal/opengunstore">GitHub</a>
           <a class="footlink" href="/docs/">Docs</a>

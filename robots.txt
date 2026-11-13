@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://opengunstore.com/sitemap.xml
+Sitemap: https://opengunstore.com/docs/sitemap.xml
