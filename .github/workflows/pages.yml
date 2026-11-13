@@ -50,7 +50,7 @@ jobs:
         run: |
           mkdir -p out
           cp index.html favicon.svg robots.txt sitemap.xml out/
-          cp -r screenshots out/
+          cp -r screenshots logos out/
           # Until the docs reach the product repo's develop, publish the landing page alone.
           if [ -f src/mkdocs.yml ]; then
             pip install -q -r src/docs/requirements.txt
