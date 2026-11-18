@@ -8,6 +8,7 @@
     <link rel="canonical" href="https://opengunstore.com/" />
     <meta name="ahrefs-site-verification" content="f43d0e20e66e15cc2dfe8c8890ffe90bd54eee92ad927078beed80552f4525e7" />
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="l+GuI2t9Z+0gEQuqllgVlg" async></script>
+    <script>document.documentElement.classList.add("js");if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("motion");</script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="OpenGunstore" />
@@ -48,20 +49,17 @@
       a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
       h1, h2, h3, p { margin: 0; }
 
-      .page { min-height: 100vh; background: var(--bg); overflow-x: hidden; }
+      .page { min-height: 100vh; background: var(--bg); overflow-x: clip; }
       .wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
       .mono { font-family: var(--mono); }
       .dim { color: var(--ink3); }
       .grow { flex: 1; }
 
-      .nav { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid var(--g200); }
       .navrow { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 64px; }
       .logo { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 600; }
       .mkc { position: relative; display: flex; flex: none; align-items: center; justify-content: center; width: 1em; height: 1em; border-radius: 0.22em; background: var(--ink); font-size: 28px; }
       .gl { font-size: 0.66em; font-weight: 800; line-height: 1; letter-spacing: -0.04em; color: #fff; }
       .gdot { position: absolute; top: 0.13em; right: 0.13em; width: 0.15em; height: 0.15em; border-radius: 50%; background: var(--green-dot); }
-      .navlinks { display: flex; gap: 28px; }
-      .navlink { font-size: 15px; color: var(--ink2); }
 
       .btn { display: inline-flex; align-items: center; justify-content: center; height: 48px; padding: 0 22px; border-radius: 8px; font-size: 16px; font-weight: 500; }
       .primary { background: var(--ink); color: #fff; }
@@ -162,6 +160,94 @@
       .footlinks { display: flex; flex-wrap: wrap; gap: 22px; }
       .footlink { color: var(--ink3); }
 
+      /* Nav: a full-width bar at the top, a floating pill once the hero's buttons pass under
+         it, dark while it sits over the dark section. A mark slides behind the section link
+         that is on screen. */
+      .nav { position: sticky; top: 0; z-index: 10; }
+      .nav::before { content: ""; position: absolute; inset: 0; background: var(--bg); border-bottom: 1px solid var(--g200); }
+      .navrow { position: relative; }
+      .is-pill::before { inset: 8px max(8px, calc(50% - 600px)); border: 1px solid rgba(23, 23, 23, 0.08); border-radius: 999px; background: rgba(255, 255, 255, 0.82); -webkit-backdrop-filter: saturate(1.6) blur(14px); backdrop-filter: saturate(1.6) blur(14px); box-shadow: 0 12px 32px -14px rgba(23, 23, 23, 0.28); }
+      .is-pill .navrow { padding-left: max(40px, calc(50% - 576px)); padding-right: max(16px, calc(50% - 592px)); max-width: none; }
+      .is-pill .btn.small { border-radius: 999px; }
+      .is-dark::before { background: rgba(38, 38, 38, 0.86); border-color: rgba(255, 255, 255, 0.1); }
+      .is-dark .logo, .is-dark .navlink[aria-current] { color: #fff; }
+      .is-dark .navlink { color: #c7c7c7; }
+      .is-dark .mkc { background: #fff; }
+      .is-dark .gl { color: var(--ink); }
+      .is-dark .primary { background: #fff; color: var(--ink); }
+      .navlinks { position: relative; display: flex; gap: 4px; }
+      .navlink { position: relative; padding: 6px 12px; border-radius: 999px; font-size: 15px; color: var(--ink2); }
+      .navlink[aria-current] { color: var(--ink); }
+      .navmark { position: absolute; top: 50%; left: 0; width: var(--w, 0); height: 32px; margin-top: -16px; border-radius: 999px; background: rgba(23, 23, 23, 0.07); transform: translateX(var(--x, 0)); opacity: 0; }
+      .has-mark .navmark { opacity: 1; }
+      .is-dark .navmark { background: rgba(255, 255, 255, 0.14); }
+      .motion .nav::before { transition: inset 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), border-radius 0.45s, background-color 0.3s, border-color 0.3s, box-shadow 0.45s; }
+      .motion .navrow { transition: padding 0.45s cubic-bezier(0.2, 0.7, 0.2, 1); }
+      .motion .navmark { transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), width 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.25s; }
+
+      /* Tickers: a row that scrolls forever. Without motion it is a plain wrapped list. */
+      .tickrow, .ticktrack, .ticklist { display: contents; }
+      .motion .tickrow { display: block; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+      .motion .ticktrack { display: flex; width: max-content; animation: tick var(--tick, 60s) linear infinite; }
+      .motion .ticklist { display: flex; flex: none; }
+      .motion .rev .ticktrack { animation-direction: reverse; }
+      .motion .tickrow:hover .ticktrack { animation-play-state: paused; }
+      .ticklist[aria-hidden] { display: none; }
+      .motion .ticklist[aria-hidden] { display: flex; }
+      @keyframes tick { to { transform: translateX(-50%); } }
+      .motion .tools { flex-direction: column; align-items: stretch; }
+      .motion .tools .ticklist { gap: 8px; padding-right: 8px; }
+      .works { padding: 36px 0; border-top: 1px solid var(--g200); border-bottom: 1px solid var(--g200); }
+      .workrow { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 56px; }
+      .worklabel { flex: none; font-size: 15px; color: var(--ink3); }
+      .work { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink2); white-space: nowrap; }
+      .motion .works .tickrow { flex: 1; min-width: 0; --tick: 45s; }
+      .motion .works .ticklist { gap: 56px; padding-right: 56px; }
+
+      /* Scroll reveal */
+      .motion [data-reveal] { transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0ms), transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0ms); }
+      .motion [data-reveal]:not(.is-in) { opacity: 0; transform: translateY(24px); }
+      .motion [data-reveal].no-anim { transition: none; }
+
+      /* Panels that play when they come into view (the markup is the finished state). */
+      .motion [data-step] { transition: opacity 0.45s ease, transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), background-color 0.6s; }
+      .is-live [data-step]:not(.in) { opacity: 0; transform: translateY(8px); }
+      .is-live [data-scan]:not(.in) { opacity: 0.35; }
+      .is-live [data-scan].in { background: var(--g50); }
+      .lrow.flash { animation: flash 1.1s ease; }
+      @keyframes flash { 30% { background: var(--red-bg); } }
+      .callst.running { color: var(--blue); }
+      .callst.running::after { content: ""; display: inline-block; width: 10px; height: 10px; margin-left: 8px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; vertical-align: -1px; animation: spin 0.7s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .box { transition: background-color 0.25s, color 0.25s; }
+      .box.off { background: var(--g300); color: transparent; }
+      .box.pop { animation: pop 0.35s cubic-bezier(0.3, 1.6, 0.5, 1); }
+      @keyframes pop { 50% { transform: scale(1.3); } }
+
+      /* Typing: every character is laid out from the start, so nothing moves while it types. */
+      .typing .c:not(.on) { color: transparent; }
+      .c.cur { box-shadow: inset 0.6em 0 0 currentColor; color: transparent; }
+      .ask .c.cur { box-shadow: inset 2px 0 0 var(--ink); }
+      .term .c.cur { box-shadow: inset 0.6em 0 0 #f0f0f0; }
+      .c.cur.blink { animation: blink 1s steps(1) infinite; }
+      @keyframes blink { 50% { box-shadow: none; } }
+
+      /* Feature screenshots as tabs (built by the script; without it they stay a grid). */
+      .shottabs { display: flex; gap: 28px; margin-top: 52px; border-bottom: 1px solid var(--g200); overflow-x: auto; scrollbar-width: none; }
+      .shottab { position: relative; flex: none; padding: 12px 0; border: 0; background: none; font: 500 16px var(--sans); color: var(--ink3); cursor: pointer; }
+      .shottab:hover, .shottab[aria-selected="true"] { color: var(--ink); }
+      .shottab:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 4px; }
+      .shottab::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 2px; background: var(--ink); transform: scaleX(0); transform-origin: left; }
+      .shottab[aria-selected="true"]::after { transform: scaleX(1); }
+      .shottab.run::after { animation: tabrun 6s linear forwards; }
+      @keyframes tabrun { from { transform: scaleX(0); } }
+      .shots.is-tabs { grid-template-columns: minmax(0, 1fr); margin-top: 24px; }
+      .is-tabs .shotcard { grid-area: 1 / 1; opacity: 0; visibility: hidden; }
+      .is-tabs .shotcard.on { opacity: 1; visibility: visible; }
+      .motion .is-tabs .shotcard { transition: opacity 0.6s, visibility 0s 0.6s; }
+      .motion .is-tabs .shotcard.on { transition: opacity 0.6s; }
+      .is-tabs .shotcap { display: none; }
+
       @media (max-width: 1340px) {
         .chat { right: 16px; }
       }
@@ -182,6 +268,10 @@
         .luser { display: none; }
         .card { padding: 22px 18px; }
         .foot { padding: 22px 16px 32px; }
+        .is-pill .navrow { padding-left: 28px; padding-right: 16px; }
+        .works { padding: 28px 0; }
+        .workrow { gap: 12px; }
+        .motion .works .tickrow { flex-basis: 100%; }
       }
     </style>
     <script type="application/ld+json">
@@ -209,6 +299,7 @@
         <div class="wrap navrow">
           <a class="logo" href="#top"><span class="mkc" aria-hidden="true"><span class="gl">G</span><span class="gdot"></span></span><span>OpenGunstore</span></a>
           <nav class="navlinks" aria-label="Sections">
+            <span class="navmark" aria-hidden="true"></span>
             <a class="navlink" href="#mcp">MCP</a>
             <a class="navlink" href="#permissions">Permissions</a>
             <a class="navlink" href="#free">Self-host</a>
@@ -236,7 +327,7 @@
                 <div class="chatbar"><span class="dot"></span><span>Claude</span><span class="grow"></span><span class="dim mono" style="font-size:13px;font-weight:400">pos.yourstore.com</span></div>
                 <div class="chatbody">
                   <div class="ask">Which guns have been on the shelf more than 90 days, and what did we pay for them?</div>
-                  <div class="call"><span class="callname">firearms_in_stock</span><span>12 serials</span></div>
+                  <div class="call"><span class="callname">firearms_in_stock</span><span class="callst">12 serials</span></div>
                   <div class="answer">
                     <p>The three oldest:</p>
                     <div class="mini">
@@ -252,11 +343,20 @@
           </div>
         </section>
 
+        <section class="works" aria-label="Works with">
+          <div class="wrap workrow">
+            <span class="worklabel">Works with</span>
+            <div class="tickrow"><div class="ticktrack"><div class="ticklist">
+              <span class="work">FastBound</span><span class="work">Payroc</span><span class="work">WooCommerce</span><span class="work">GunBroker</span><span class="work">RSR Group</span><span class="work">Sports South</span><span class="work">ShipStation</span><span class="work">ATF eZ Check</span><span class="work">Claude</span><span class="work">ChatGPT</span>
+            </div></div></div>
+          </div>
+        </section>
+
         <section class="sec" id="mcp">
           <div class="wrap">
-            <h2 class="h2">Built-in MCP server</h2>
-            <p class="body">Connect Claude, ChatGPT or any MCP client with a POS login. Over 100 tools.</p>
-            <div class="panel mcpwrap">
+            <h2 class="h2" data-reveal>Built-in MCP server</h2>
+            <p class="body" data-reveal>Connect Claude, ChatGPT or any MCP client with a POS login. Over <span data-num>100</span> tools.</p>
+            <div class="panel mcpwrap" data-reveal data-mcp>
               <div class="phead"><span class="ptitle">MCP Settings</span><span class="grow"></span><span class="btn primary small">Save</span></div>
               <div class="tabs"><span class="tab tabon">MCP Server</span></div>
               <div class="formgrid">
@@ -272,11 +372,9 @@
                 </div>
               </div>
             </div>
-            <div class="tools">
-              <span class="tool">firearms_in_stock</span><span class="tool">receive_goods</span><span class="tool">start_4473</span><span class="tool">atf_verify_ffl</span>
-              <span class="tool">cash_drawer_close_day</span><span class="tool">record_payment</span><span class="tool">payroc_transactions</span><span class="tool">inventory_count_scan</span>
-              <span class="tool">storage_where</span><span class="tool">distributor_quote</span><span class="tool">distributor_orders</span><span class="tool">woo_push_serial</span>
-              <span class="tool">gb_push_serial</span><span class="tool">pending_orders</span><span class="tool">sales_report</span><span class="tool">tax_liability</span>
+            <div class="tools" data-reveal>
+              <div class="tickrow"><div class="ticktrack"><div class="ticklist"><span class="tool">firearms_in_stock</span><span class="tool">receive_goods</span><span class="tool">start_4473</span><span class="tool">atf_verify_ffl</span><span class="tool">cash_drawer_close_day</span><span class="tool">record_payment</span><span class="tool">payroc_transactions</span><span class="tool">inventory_count_scan</span></div></div></div>
+              <div class="tickrow rev"><div class="ticktrack"><div class="ticklist"><span class="tool">storage_where</span><span class="tool">distributor_quote</span><span class="tool">distributor_orders</span><span class="tool">woo_push_serial</span><span class="tool">gb_push_serial</span><span class="tool">pending_orders</span><span class="tool">sales_report</span><span class="tool">tax_liability</span></div></div></div>
               <span class="toolmore">and about 90 more</span>
             </div>
           </div>
@@ -285,14 +383,14 @@
         <section class="sec gray" id="permissions">
           <div class="wrap trustgrid">
             <div>
-              <h2 class="h2">Every call is auditable</h2>
-              <div class="points">
+              <h2 class="h2" data-reveal>Every call is auditable</h2>
+              <div class="points" data-stagger>
                 <div class="point">Runs with the signed-in user's permissions</div>
                 <div class="point">Payments, stock and compliance changes need confirmation</div>
                 <div class="point">Logged before it runs, credentials redacted</div>
               </div>
             </div>
-            <div class="panel" aria-label="Connector Audit Log example">
+            <div class="panel" aria-label="Connector Audit Log example" data-reveal data-audit>
               <div class="phead"><span class="ptitle">Connector Audit Log</span><span class="grow"></span><span class="btn secondary small">Filter</span></div>
               <div class="lhead"><span>Tool</span><span class="luser">User</span><span>Status</span><span class="ltime">Time</span></div>
               <div class="lrow"><span class="ltool">receive_goods</span><span class="luser">dana@yourstore.com</span><span><span class="st st-ok">Success</span></span><span class="ltime">09:12</span></div>
@@ -307,12 +405,12 @@
 
         <section class="dark" id="free">
           <div class="wrap">
-            <h2 class="h2">Open source and free</h2>
-            <p class="darkbody">GPLv3. Runs on your own server, and your data stays there.</p>
-            <div class="freegrid">
+            <h2 class="h2" data-reveal>Open source and free</h2>
+            <p class="darkbody" data-reveal>GPLv3. Runs on your own server, and your data stays there.</p>
+            <div class="freegrid" data-stagger>
               <div class="card">
                 <h3 class="cardh">Install it yourself</h3>
-                <pre class="term"><span class="tp">$ </span>git clone \
+                <pre class="term" data-type><span class="tp">$ </span>git clone \
     https://github.com/Old-Steel-Arsenal/opengunstore
 <span class="tp">$ </span>cd opengunstore
 <span class="tp">$ </span>docker build --platform linux/amd64 \
@@ -321,7 +419,7 @@
               </div>
               <div class="card">
                 <h3 class="cardh">Or let your coding agent install it</h3>
-                <pre class="term"><span class="tp">$ </span>claude "Install OpenGunstore on this
+                <pre class="term" data-type><span class="tp">$ </span>claude "Install OpenGunstore on this
   server. Follow docs/deploy-with-ai.md."</pre>
                 <a class="textlink" href="/docs/deploy-with-ai/">deploy-with-ai.md</a>
               </div>
@@ -331,16 +429,16 @@
 
         <section class="sec" id="features">
           <div class="wrap">
-            <h2 class="h2">Features</h2>
-            <p class="body">In daily use at <a href="https://oldsteelarsenal.com/" style="text-decoration:underline">Old Steel Arsenal</a>, an independent FFL dealer in Plano, Texas. Built on Frappe and ERPNext v16.</p>
-            <a class="userlogo" href="https://oldsteelarsenal.com/"><img src="/logos/old-steel-arsenal.webp" width="480" height="132" loading="lazy" alt="Old Steel Arsenal" /></a>
-            <div class="shots">
+            <h2 class="h2" data-reveal>Features</h2>
+            <p class="body" data-reveal>In daily use at <a href="https://oldsteelarsenal.com/" style="text-decoration:underline">Old Steel Arsenal</a>, an independent FFL dealer in Plano, Texas. Built on Frappe and ERPNext v16.</p>
+            <a class="userlogo" data-reveal href="https://oldsteelarsenal.com/"><img src="/logos/old-steel-arsenal.webp" width="480" height="132" loading="lazy" alt="Old Steel Arsenal" /></a>
+            <div class="shots" data-reveal>
               <a class="shotcard" href="/screenshots/pos-terminal.webp"><img class="shotimg" src="/screenshots/pos-terminal.webp" loading="lazy" alt="Point of Sale" /><span class="shotcap">Point of Sale</span></a>
               <a class="shotcard" href="/screenshots/page-storage-map.webp"><img class="shotimg" src="/screenshots/page-storage-map.webp" loading="lazy" alt="Storage Locations" /><span class="shotcap">Storage Locations</span></a>
               <a class="shotcard" href="/screenshots/page-cash-drawer.webp"><img class="shotimg" src="/screenshots/page-cash-drawer.webp" loading="lazy" alt="Cash Drawer" /><span class="shotcap">Cash Drawer</span></a>
               <a class="shotcard" href="/screenshots/report-4473-records.webp"><img class="shotimg" src="/screenshots/report-4473-records.webp" loading="lazy" alt="Form 4473 Records" /><span class="shotcap">Form 4473 Records</span></a>
             </div>
-            <div class="featgrid">
+            <div class="featgrid" data-stagger>
               <div class="feat"><span class="featn">Counter</span><span class="featd">Serial picking, license scanning, order queues</span></div>
               <div class="feat"><span class="featn">Form 4473</span><span class="featd">Sale is blocked until the 4473 is complete and NICS says Proceed</span></div>
               <div class="feat"><span class="featn">Bound book</span><span class="featd">Electronic bound book, synced to FastBound</span></div>
@@ -355,8 +453,8 @@
 
         <section class="close">
           <div class="wrap">
-            <h2 class="closeh">Get started</h2>
-            <div class="closectas">
+            <h2 class="closeh" data-reveal>Get started</h2>
+            <div class="closectas" data-reveal style="--d:120ms">
               <a class="btn primary" href="https://github.com/Old-Steel-Arsenal/opengunstore">View on GitHub</a>
               <a class="btn secondary" href="/docs/self-hosting/">Install guide</a>
             </div>
@@ -374,5 +472,287 @@
         </div>
       </footer>
     </div>
+    <script>
+    (function () {
+      var motion = document.documentElement.classList.contains("motion");
+      var IO = "IntersectionObserver" in window;
+      function $$(sel, root) { return [].slice.call((root || document).querySelectorAll(sel)); }
+
+      // Counts a number up in its own format ("$612", "214", "100").
+      function countUp(el, ms, alive) {
+        var m = /^([^\d]*)([\d,]+)(.*)$/.exec(el.textContent.trim());
+        if (!m) return;
+        var to = +m[2].replace(/,/g, ""), start = performance.now();
+        (function tick(now) {
+          if (alive && !alive()) return;
+          var k = Math.min(1, (now - start) / ms), e = 1 - Math.pow(1 - k, 3);
+          el.textContent = m[1] + Math.round(to * e).toLocaleString("en-US") + m[3];
+          if (k < 1) requestAnimationFrame(tick);
+        })(start);
+      }
+
+      // Wraps each character of el's text in a span, so it can be typed out without
+      // anything moving. Returns the spans in order.
+      function chars(el) {
+        var out = [], walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        nodes.forEach(function (n) {
+          var frag = document.createDocumentFragment();
+          n.nodeValue.split("").forEach(function (ch) {
+            var s = document.createElement("span");
+            s.className = "c";
+            s.textContent = ch;
+            frag.appendChild(s);
+            out.push(s);
+          });
+          n.parentNode.replaceChild(frag, n);
+        });
+        return out;
+      }
+
+      // A panel that plays when it comes into view. The markup holds the finished state:
+      // with no script or reduced motion it reads as-is. prep() sets the start state (while
+      // the panel is off screen), run(at, alive) schedules the play.
+      function player(el, prep, run, delay) {
+        if (!motion || !IO) return;
+        var html = el.innerHTML, timers = [], gen = 0, state = "done";
+        function at(ms, fn) { timers.push(setTimeout(fn, ms + (delay || 0))); }
+        function reset() {
+          timers.forEach(clearTimeout); timers = []; gen++;
+          el.innerHTML = html;
+          el.classList.add("is-live");
+          prep(el);
+          state = "ready";
+        }
+        function play() {
+          var g = gen;
+          state = "playing";
+          var end = run(el, at, function () { return g === gen; });
+          at(end, function () { el.classList.remove("is-live"); state = "done"; });
+        }
+        new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) {
+            if (state === "playing") return;
+            if (state !== "ready") reset();
+            play();
+          } else if (state !== "ready") {
+            reset();
+          }
+        }, { rootMargin: "0px 0px -12% 0px" }).observe(el);
+      }
+
+      // Types spans out. Prompt characters ("$ ") land at once with a pause; a cursor sits
+      // on the next character.
+      function type(list, at, from, perChar) {
+        var t = from;
+        list.forEach(function (s, i) {
+          var prompt = s.parentNode.classList.contains("tp");
+          var prevPrompt = i > 0 && list[i - 1].parentNode.classList.contains("tp");
+          if (prompt && !prevPrompt) t += 320;
+          else if (s.textContent === "\n") t += 140;
+          else if (!(s.textContent === " " && list[i - 1] && list[i - 1].textContent.trim() === "")) t += perChar;
+          at(t, function () {
+            s.classList.add("on");
+            s.classList.remove("cur");
+            if (list[i + 1]) list[i + 1].classList.add("cur");
+          });
+        });
+        return t;
+      }
+
+      // Hero: the question types out, the tool runs, the answer comes in row by row.
+      var chat = document.querySelector(".chatbody");
+      if (chat) player(chat, function (el) {
+        var ask = el.querySelector(".ask");
+        ask.classList.add("typing");
+        chars(ask)[0].classList.add("cur");
+        el.querySelector(".call").setAttribute("data-step", "");
+        el.querySelector(".answer p").setAttribute("data-step", "");
+        $$(".minirow", el).forEach(function (r) { r.setAttribute("data-step", ""); });
+        var st = el.querySelector(".callst");
+        st.textContent = "Running";
+        st.classList.add("running");
+      }, function (el, at, alive) {
+        var t = type($$(".ask .c", el), at, 200, 16);
+        var call = el.querySelector(".call"), st = el.querySelector(".callst");
+        at(t + 250, function () { call.classList.add("in"); });
+        at(t + 1150, function () { st.classList.remove("running"); st.textContent = "12 serials"; });
+        at(t + 1350, function () { el.querySelector(".answer p").classList.add("in"); });
+        $$(".minirow", el).forEach(function (r, i) {
+          at(t + 1550 + i * 230, function () {
+            r.classList.add("in");
+            $$(".num", r).forEach(function (n) { countUp(n, 650, alive); });
+          });
+        });
+        return t + 1550 + 2 * 230 + 700;
+      }, 300);
+
+      // Audit log: every row waits as Running, then a check runs down the list.
+      var audit = document.querySelector("[data-audit]");
+      if (audit) player(audit, function (el) {
+        $$(".lrow", el).forEach(function (r) {
+          var st = r.querySelector(".st");
+          r.setAttribute("data-scan", "");
+          r.setAttribute("data-final", st.className + "|" + st.textContent);
+          st.className = "st st-run";
+          st.textContent = "Running";
+        });
+      }, function (el, at) {
+        $$(".lrow", el).forEach(function (r, i) {
+          var fin = r.getAttribute("data-final").split("|"), st = r.querySelector(".st");
+          at(200 + i * 300, function () { r.classList.add("in"); });
+          at(460 + i * 300, function () {
+            st.className = fin[0];
+            st.textContent = fin[1];
+            if (/st-no/.test(fin[0])) r.classList.add("flash");
+          });
+          at(1200 + i * 300, function () { r.removeAttribute("data-scan"); });
+        });
+        return 460 + 6 * 300 + 900;
+      });
+
+      // MCP settings: the two servers switch on, and their URLs fill in.
+      var mcp = document.querySelector("[data-mcp] .formgrid");
+      if (mcp) player(mcp, function (el) {
+        $$(".box", el).forEach(function (b) { b.classList.add("off"); });
+        $$(".field", el).forEach(function (f) { f.setAttribute("data-step", ""); });
+      }, function (el, at) {
+        $$(".fcol", el).forEach(function (col, c) {
+          var base = 250 + c * 650;
+          at(base, function () { var b = col.querySelector(".box"); b.classList.remove("off"); b.classList.add("pop"); });
+          $$(".field", col).forEach(function (f, i) { at(base + 200 + i * 180, function () { f.classList.add("in"); }); });
+        });
+        return 250 + 650 + 200 + 180 + 600;
+      });
+
+      // Install commands type themselves out; the cursor keeps blinking at the end.
+      $$("[data-type]").forEach(function (pre, n) {
+        player(pre, function (el) {
+          el.classList.add("typing");
+          var end = document.createElement("span");
+          end.className = "c";
+          end.textContent = " ";
+          el.appendChild(end);
+          chars(el)[0].classList.add("cur");
+        }, function (el, at) {
+          var list = $$(".c", el), last = list.pop();
+          var t = type(list, at, 0, 24);
+          at(t + 30, function () { last.classList.add("on", "cur", "blink"); });
+          return t + 60;
+        }, n * 500);
+      });
+
+      // Tickers: a second copy of the list makes the loop seamless.
+      if (motion) $$(".ticktrack").forEach(function (track) {
+        var copy = track.firstElementChild.cloneNode(true);
+        copy.setAttribute("aria-hidden", "true");
+        track.appendChild(copy);
+      });
+
+      // Feature screenshots become tabs that advance on their own while on screen, until
+      // someone picks one.
+      var shots = document.querySelector(".shots");
+      if (shots) {
+        var cards = $$(".shotcard", shots), cur = 0, auto = motion, seen = false;
+        var bar = document.createElement("div");
+        bar.className = "shottabs";
+        bar.setAttribute("role", "tablist");
+        bar.setAttribute("data-reveal", "");
+        var tabs = cards.map(function (c, i) {
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "shottab";
+          b.setAttribute("role", "tab");
+          b.textContent = c.querySelector(".shotcap").textContent;
+          b.addEventListener("click", function () { auto = false; show(i); });
+          b.addEventListener("animationend", function () { if (auto) show((cur + 1) % cards.length); });
+          bar.appendChild(b);
+          return b;
+        });
+        function show(i) {
+          cur = i;
+          cards.forEach(function (c, j) {
+            c.classList.toggle("on", j === i);
+            c.setAttribute("aria-hidden", String(j !== i));
+            c.tabIndex = j === i ? 0 : -1;
+          });
+          tabs.forEach(function (b, j) { b.setAttribute("aria-selected", String(j === i)); b.classList.remove("run"); });
+          if (auto && seen) { void tabs[i].offsetWidth; tabs[i].classList.add("run"); }
+        }
+        shots.parentNode.insertBefore(bar, shots);
+        shots.classList.add("is-tabs");
+        show(0);
+        if (IO) new IntersectionObserver(function (e) { seen = e[0].isIntersecting; show(cur); }, { threshold: 0.4 }).observe(shots);
+      }
+
+      // Groups whose children come in one after another.
+      $$("[data-stagger]").forEach(function (g) {
+        [].forEach.call(g.children, function (c, i) {
+          c.setAttribute("data-reveal", "");
+          c.style.setProperty("--d", i * 80 + "ms");
+        });
+      });
+
+      // Scroll reveal: fade each [data-reveal] up the first time it comes into view, and
+      // count up any number in it.
+      var reveal = $$("[data-reveal]"), catchUp = function () {};
+      function shown(el) {
+        el.classList.add("is-in");
+        if (motion) $$("[data-num]", el).forEach(function (n) { countUp(n, 1100); });
+      }
+      if (!motion || !IO) reveal.forEach(function (el) { el.classList.add("is-in"); });
+      else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { shown(e.target); io.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: "0px 0px -8% 0px" });
+        reveal.forEach(function (el) { io.observe(el); });
+        // An instant jump (an anchor, restored scroll) can skip past a section without it
+        // ever crossing the threshold: show anything already above the fold at once.
+        catchUp = function () {
+          reveal.forEach(function (el) {
+            if (!el.classList.contains("is-in") && el.getBoundingClientRect().bottom < 0) {
+              el.classList.add("no-anim");
+              shown(el);
+              io.unobserve(el);
+            }
+          });
+        };
+        window.addEventListener("pageshow", catchUp);
+      }
+
+      // Nav: pill once the hero's buttons pass under it, dark over the dark section, and a
+      // mark behind the link of the section on screen.
+      var nav = document.querySelector(".nav"), heroCtas = document.querySelector(".hero .ctas");
+      var dark = document.getElementById("free"), links = $$('.navlinks a[href^="#"]');
+      var mark = document.querySelector(".navmark"), navlinks = document.querySelector(".navlinks");
+      var targets = links.map(function (a) { return document.getElementById(a.getAttribute("href").slice(1)); });
+      var frame = null, current = -2;
+      function update() {
+        frame = null;
+        var h = nav.offsetHeight;
+        nav.classList.toggle("is-pill", heroCtas.getBoundingClientRect().bottom < h);
+        var d = dark.getBoundingClientRect();
+        nav.classList.toggle("is-dark", d.top < h / 2 && d.bottom > h / 2);
+        var mid = window.innerHeight * 0.45, at = -1;
+        targets.forEach(function (t, i) {
+          var r = t.getBoundingClientRect();
+          if (r.top < mid && r.bottom > mid) at = i;
+        });
+        catchUp();
+        if (at === current) return;
+        current = at;
+        links.forEach(function (a, i) { if (i === at) a.setAttribute("aria-current", "location"); else a.removeAttribute("aria-current"); });
+        navlinks.classList.toggle("has-mark", at >= 0);
+        if (at >= 0) {
+          mark.style.setProperty("--x", links[at].offsetLeft + "px");
+          mark.style.setProperty("--w", links[at].offsetWidth + "px");
+        }
+      }
+      function queue() { if (frame === null) frame = requestAnimationFrame(update); }
+      window.addEventListener("scroll", queue, { passive: true });
+      window.addEventListener("resize", function () { current = -2; queue(); });
+      update();
+    })();
+    </script>
   </body>
 </html>
