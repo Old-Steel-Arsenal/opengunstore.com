@@ -153,6 +153,11 @@
       .featn { font-size: 18px; font-weight: 600; }
       .featd { font-size: 17px; color: var(--ink2); text-wrap: pretty; }
       .whopoints { max-width: 760px; }
+      .choose { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; margin-top: 56px; }
+      .chooseh { font-size: 21px; font-weight: 600; }
+      .choose .points { margin-top: 20px; }
+      .choose .point { font-size: 18px; }
+      .choosenote { margin-top: 40px; max-width: 64ch; font-size: 18px; font-weight: 500; text-wrap: pretty; }
       #why .featgrid { row-gap: 8px; }
       #why .feat { grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 28px 0 32px; }
       #why .featn { font-size: 26px; letter-spacing: -0.02em; }
@@ -274,7 +279,7 @@
         .chat { position: static; width: auto; margin-top: 20px; }
         .showcase { padding-bottom: 72px; }
         .trustgrid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
-        .formgrid, .freegrid, .featgrid, .shots, .plans { grid-template-columns: minmax(0, 1fr); }
+        .formgrid, .freegrid, .featgrid, .shots, .plans, .choose { grid-template-columns: minmax(0, 1fr); }
       }
       @media (max-width: 720px) {
         .navlinks { display: none; }
@@ -334,11 +339,11 @@
         <section class="hero" id="top">
           <div class="wrap">
             <div class="herotext">
-              <h1 class="h1">The POS for FFL with AI built in</h1>
-              <p class="lead">An open-source gun store POS: counter, bound book, web store and distributor orders in one system.</p>
+              <h1 class="h1">The gun store POS you run by asking</h1>
+              <p class="lead">Ask Claude or ChatGPT to receive an invoice, find a gun or check sales tax. It does the work in your open-source POS.</p>
               <div class="ctas">
-                <a class="btn primary" href="https://github.com/Old-Steel-Arsenal/opengunstore">View on GitHub</a>
-                <a class="btn secondary" href="/docs/self-hosting/">Install guide</a>
+                <a class="btn primary" href="#pricing">See plans</a>
+                <a class="btn secondary" href="https://github.com/Old-Steel-Arsenal/opengunstore">View on GitHub</a>
               </div>
             </div>
             <div class="showcase">
@@ -376,9 +381,11 @@
           <div class="wrap">
             <h2 class="h2" data-reveal>Why OpenGunstore</h2>
             <div class="featgrid" data-stagger>
-              <div class="feat"><span class="featn">AI built in</span><span class="featd">Claude, ChatGPT or any MCP client runs the store through over 100 tools, with each person's own permissions</span></div>
-              <div class="feat"><span class="featn">Fast</span><span class="featd">Counter, bound book, web store, GunBroker and distributors in one system. Sell once, stock updates everywhere</span></div>
-              <div class="feat"><span class="featn">Customizable</span><span class="featd">Add fields, forms, reports, roles and workflows from the browser, without code</span></div>
+              <div class="feat"><span class="featn">AI does the work</span><span class="featd">Type what you need in plain English. The AI looks it up or makes the change in the POS, and asks first before it touches money, stock or the bound book</span></div>
+              <div class="feat"><span class="featn">No double entry</span><span class="featd">Counter, bound book, website, GunBroker and distributors share one inventory. Sell a gun once and it comes off everywhere</span></div>
+              <div class="feat"><span class="featn">Easy to learn</span><span class="featd">One screen per job, and a gun sale can't go through until the 4473 is done. New staff can't skip a step</span></div>
+              <div class="feat"><span class="featn">Built in a gun store</span><span class="featd">Written for, and run every day at, a working FFL dealer</span></div>
+              <div class="feat"><span class="featn">Make it yours</span><span class="featd">Add fields, forms, reports and roles from the browser, without code</span></div>
               <div class="feat"><span class="featn">Extensible</span><span class="featd">Add-on apps install from the UI and update without a restart. Every action has a documented API</span></div>
             </div>
           </div>
@@ -504,6 +511,25 @@
           <div class="wrap">
             <h2 class="h2" data-reveal>Pricing</h2>
             <p class="body" data-reveal>Every plan runs the same open-source code.</p>
+            <div class="choose" data-stagger>
+              <div>
+                <h3 class="chooseh">Host it yourself if</h3>
+                <div class="points">
+                  <div class="point">Someone on your team runs Linux servers and Docker</div>
+                  <div class="point">You want full control of the server and upgrades</div>
+                  <div class="point">You can test a backup restore before you need it</div>
+                </div>
+              </div>
+              <div>
+                <h3 class="chooseh">Let us host it if</h3>
+                <div class="points">
+                  <div class="point">No one on staff manages servers</div>
+                  <div class="point">You want tax, FastBound, payments and your website set up right the first time</div>
+                  <div class="point">You would rather sell guns than run backups</div>
+                </div>
+              </div>
+            </div>
+            <p class="choosenote" data-reveal>No IT background? Choose Hosted. A bad setup can put your bound book at risk, so we configure everything once and keep it running.</p>
             <div class="plans" data-stagger>
               <div class="plan">
                 <h3 class="planh">Self-hosted</h3>
@@ -530,6 +556,7 @@
                 <h3 class="planh">Hosted</h3>
                 <div class="price">$249<span class="per">/ month per store</span></div>
                 <ul class="planlist">
+                  <li>Set up for your store: tax, FastBound, payments, website</li>
                   <li>We run the server, backups and upgrades</li>
                   <li>Data API included</li>
                   <li>AI connector set up</li>
@@ -546,8 +573,8 @@
           <div class="wrap">
             <h2 class="closeh" data-reveal>Get started</h2>
             <div class="closectas" data-reveal style="--d:120ms">
-              <a class="btn primary" href="https://github.com/Old-Steel-Arsenal/opengunstore">View on GitHub</a>
-              <a class="btn secondary" href="/docs/self-hosting/">Install guide</a>
+              <a class="btn primary" href="#pricing">See plans</a>
+              <a class="btn secondary" href="https://github.com/Old-Steel-Arsenal/opengunstore">View on GitHub</a>
             </div>
           </div>
         </section>
