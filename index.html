@@ -152,6 +152,21 @@
       .feat { display: grid; grid-template-columns: minmax(0, 170px) minmax(0, 1fr); gap: 24px; padding: 22px 0; border-top: 1px solid var(--g200); }
       .featn { font-size: 18px; font-weight: 600; }
       .featd { font-size: 17px; color: var(--ink2); text-wrap: pretty; }
+      .whopoints { max-width: 760px; }
+      .plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 56px; align-items: stretch; }
+      .plan { display: flex; flex-direction: column; gap: 22px; padding: 32px 28px 28px; border: 1px solid var(--g200); border-radius: 12px; background: var(--bg); }
+      .plan.pick { background: var(--ink); border-color: var(--ink); color: #fff; }
+      .planh { font-size: 21px; font-weight: 600; }
+      .price { font-size: 48px; font-weight: 700; line-height: 1; letter-spacing: -0.03em; }
+      .per { margin-left: 6px; font-size: 16px; font-weight: 500; letter-spacing: 0; color: var(--ink3); }
+      .pick .per { color: #a3a3a3; }
+      .planlist { display: flex; flex-direction: column; gap: 12px; margin: 0; padding: 0; list-style: none; font-size: 16px; color: var(--ink2); }
+      .pick .planlist { color: #d4d4d4; }
+      .planlist li { position: relative; padding-left: 26px; text-wrap: pretty; }
+      .planlist li::before { content: "✓"; position: absolute; left: 0; color: var(--green-dot); font-weight: 700; }
+      .plan .btn { margin-top: auto; }
+      .pick .primary { background: #fff; color: var(--ink); }
+      .pick .primary:hover { background: var(--g200); color: var(--ink); }
 
       .close { padding: 128px 0; text-align: center; background: var(--g50); }
       .closeh { margin: 0 auto; max-width: 16ch; font-size: clamp(40px, 5.6vw, 72px); line-height: 1.04; letter-spacing: -0.035em; font-weight: 700; text-wrap: balance; }
@@ -255,7 +270,7 @@
         .chat { position: static; width: auto; margin-top: 20px; }
         .showcase { padding-bottom: 72px; }
         .trustgrid { grid-template-columns: minmax(0, 1fr); gap: 48px; }
-        .formgrid, .freegrid, .featgrid, .shots { grid-template-columns: minmax(0, 1fr); }
+        .formgrid, .freegrid, .featgrid, .shots, .plans { grid-template-columns: minmax(0, 1fr); }
       }
       @media (max-width: 720px) {
         .navlinks { display: none; }
@@ -304,6 +319,7 @@
             <a class="navlink" href="#permissions">Permissions</a>
             <a class="navlink" href="#free">Self-host</a>
             <a class="navlink" href="#features">Features</a>
+            <a class="navlink" href="#pricing">Pricing</a>
             <a class="navlink" href="/docs/">Docs</a>
           </nav>
           <a class="btn primary small" href="https://github.com/Old-Steel-Arsenal/opengunstore">GitHub</a>
@@ -349,6 +365,20 @@
             <div class="tickrow"><div class="ticktrack"><div class="ticklist">
               <span class="work">FastBound</span><span class="work">Payroc</span><span class="work">WooCommerce</span><span class="work">GunBroker</span><span class="work">RSR Group</span><span class="work">Sports South</span><span class="work">Lipsey's</span><span class="work">ShipStation</span><span class="work">ATF eZ Check</span><span class="work">Claude</span><span class="work">ChatGPT</span>
             </div></div></div>
+          </div>
+        </section>
+
+        <section class="sec gray" id="why">
+          <div class="wrap">
+            <h2 class="h2" data-reveal>Why OpenGunstore</h2>
+            <div class="featgrid" data-stagger>
+              <div class="feat"><span class="featn">Built in a gun store</span><span class="featd">Written for, and run every day at, a working FFL dealer</span></div>
+              <div class="feat"><span class="featn">Compliance in the sale</span><span class="featd">The 4473, NICS result and bound book are checked before a gun can be sold</span></div>
+              <div class="feat"><span class="featn">Your data stays yours</span><span class="featd">Inventory, customers and books live in your own database</span></div>
+              <div class="feat"><span class="featn">No lock-in</span><span class="featd">GPLv3 code on standard ERPNext. If we stop, the code is still yours</span></div>
+              <div class="feat"><span class="featn">Read and change it</span><span class="featd">Audit the code that touches your bound book and payments. Add your own extensions</span></div>
+              <div class="feat"><span class="featn">No per-seat fees</span><span class="featd">Every employee and every register at no extra cost</span></div>
+            </div>
           </div>
         </section>
 
@@ -451,6 +481,61 @@
               <div class="feat"><span class="featn">Pre-orders</span><span class="featd">Take full payment or a deposit, deliver when stock arrives</span></div>
               <div class="feat"><span class="featn">Gunsmithing</span><span class="featd">Work orders from intake to pickup</span></div>
               <div class="feat"><span class="featn">CRM</span><span class="featd">Frappe CRM with team mail, want lists and held guns</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="sec gray" id="who">
+          <div class="wrap">
+            <h2 class="h2" data-reveal>Who it's for</h2>
+            <div class="points whopoints" data-stagger>
+              <div class="point">Independent FFL dealers</div>
+              <div class="point">Stores that sell at the counter, online and on GunBroker</div>
+              <div class="point">Shops that take trade-ins, consignments and used guns</div>
+              <div class="point">Bound book in FastBound, or paper 4473s</div>
+              <div class="point">Texas and California tax built in. Other states set their own rates</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="sec" id="pricing">
+          <div class="wrap">
+            <h2 class="h2" data-reveal>Pricing</h2>
+            <p class="body" data-reveal>Every plan runs the same open-source code.</p>
+            <div class="plans" data-stagger>
+              <div class="plan">
+                <h3 class="planh">Self-hosted</h3>
+                <div class="price">$0</div>
+                <ul class="planlist">
+                  <li>Every feature in the repository</li>
+                  <li>Your server, your upgrades</li>
+                  <li>Help on GitHub</li>
+                </ul>
+                <a class="btn secondary" href="/docs/self-hosting/">Install guide</a>
+              </div>
+              <div class="plan">
+                <h3 class="planh">Data API</h3>
+                <div class="price">$49<span class="per">/ month per store</span></div>
+                <ul class="planlist">
+                  <li>For self-hosted stores</li>
+                  <li>One product catalog across RSR, Sports South and Lipsey's</li>
+                  <li>National FFL search</li>
+                  <li>Extension updates</li>
+                </ul>
+                <a class="btn secondary" href="mailto:info@oldsteelarsenal.com?subject=OpenGunstore%20Data%20API">Contact us</a>
+              </div>
+              <div class="plan pick">
+                <h3 class="planh">Hosted</h3>
+                <div class="price">$249<span class="per">/ month per store</span></div>
+                <ul class="planlist">
+                  <li>We run the server, backups and upgrades</li>
+                  <li>Data API included</li>
+                  <li>AI connector set up</li>
+                  <li>Paid extensions included</li>
+                  <li>Email support</li>
+                </ul>
+                <a class="btn primary" href="mailto:info@oldsteelarsenal.com?subject=OpenGunstore%20Hosted">Contact us</a>
+              </div>
             </div>
           </div>
         </section>
