@@ -153,6 +153,10 @@
       .featn { font-size: 18px; font-weight: 600; }
       .featd { font-size: 17px; color: var(--ink2); text-wrap: pretty; }
       .whopoints { max-width: 760px; }
+      #why .featgrid { row-gap: 8px; }
+      #why .feat { grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 28px 0 32px; }
+      #why .featn { font-size: 26px; letter-spacing: -0.02em; }
+      #why .featd { max-width: 44ch; font-size: 18px; }
       .plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 56px; align-items: stretch; }
       .plan { display: flex; flex-direction: column; gap: 22px; padding: 32px 28px 28px; border: 1px solid var(--g200); border-radius: 12px; background: var(--bg); }
       .plan.pick { background: var(--ink); border-color: var(--ink); color: #fff; }
@@ -372,12 +376,10 @@
           <div class="wrap">
             <h2 class="h2" data-reveal>Why OpenGunstore</h2>
             <div class="featgrid" data-stagger>
-              <div class="feat"><span class="featn">Built in a gun store</span><span class="featd">Written for, and run every day at, a working FFL dealer</span></div>
-              <div class="feat"><span class="featn">Compliance in the sale</span><span class="featd">The 4473, NICS result and bound book are checked before a gun can be sold</span></div>
-              <div class="feat"><span class="featn">Your data stays yours</span><span class="featd">Inventory, customers and books live in your own database</span></div>
-              <div class="feat"><span class="featn">No lock-in</span><span class="featd">GPLv3 code on standard ERPNext. If we stop, the code is still yours</span></div>
-              <div class="feat"><span class="featn">Read and change it</span><span class="featd">Audit the code that touches your bound book and payments. Add your own extensions</span></div>
-              <div class="feat"><span class="featn">No per-seat fees</span><span class="featd">Every employee and every register at no extra cost</span></div>
+              <div class="feat"><span class="featn">AI built in</span><span class="featd">Claude, ChatGPT or any MCP client runs the store through over 100 tools, with each person's own permissions</span></div>
+              <div class="feat"><span class="featn">Fast</span><span class="featd">Counter, bound book, web store, GunBroker and distributors in one system. Sell once, stock updates everywhere</span></div>
+              <div class="feat"><span class="featn">Customizable</span><span class="featd">Add fields, forms, reports, roles and workflows from the browser, without code</span></div>
+              <div class="feat"><span class="featn">Extensible</span><span class="featd">Add-on apps install from the UI and update without a restart. Every action has a documented API</span></div>
             </div>
           </div>
         </section>
