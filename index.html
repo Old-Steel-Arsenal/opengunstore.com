@@ -347,7 +347,7 @@
           <div class="wrap workrow">
             <span class="worklabel">Works with</span>
             <div class="tickrow"><div class="ticktrack"><div class="ticklist">
-              <span class="work">FastBound</span><span class="work">Payroc</span><span class="work">WooCommerce</span><span class="work">GunBroker</span><span class="work">RSR Group</span><span class="work">Sports South</span><span class="work">ShipStation</span><span class="work">ATF eZ Check</span><span class="work">Claude</span><span class="work">ChatGPT</span>
+              <span class="work">FastBound</span><span class="work">Payroc</span><span class="work">WooCommerce</span><span class="work">GunBroker</span><span class="work">RSR Group</span><span class="work">Sports South</span><span class="work">Lipsey's</span><span class="work">ShipStation</span><span class="work">ATF eZ Check</span><span class="work">Claude</span><span class="work">ChatGPT</span>
             </div></div></div>
           </div>
         </section>
@@ -363,12 +363,12 @@
                 <div class="fcol">
                   <div class="check"><span class="box">✓</span><span>Enable Full MCP Server</span></div>
                   <div class="field"><span class="flabel">Full MCP Server URL</span><div class="finput">https://pos.yourstore.com/connector/full/mcp</div></div>
-                  <div class="field"><span class="flabel">Claude Code Command (Full)</span><div class="finput fmono">claude mcp add -s user --transport http opengunstore https://pos.yourstore.com/connector/full/mcp</div></div>
+                  <div class="field"><span class="flabel">Claude Code Command (Full)</span><div class="finput fmono">claude mcp add -s user --transport http gunstore-pos https://pos.yourstore.com/connector/full/mcp</div></div>
                 </div>
                 <div class="fcol">
                   <div class="check"><span class="box">✓</span><span>Enable Read-only MCP Server</span></div>
                   <div class="field"><span class="flabel">Read-only MCP Server URL</span><div class="finput">https://pos.yourstore.com/connector/cpa/mcp</div></div>
-                  <div class="field"><span class="flabel">Claude Code Command (Read-only)</span><div class="finput fmono">claude mcp add -s user --transport http opengunstore-cpa https://pos.yourstore.com/connector/cpa/mcp</div></div>
+                  <div class="field"><span class="flabel">Claude Code Command (Read-only)</span><div class="finput fmono">claude mcp add -s user --transport http gunstore-pos-cpa https://pos.yourstore.com/connector/cpa/mcp</div></div>
                 </div>
               </div>
             </div>
@@ -414,7 +414,7 @@
     https://github.com/Old-Steel-Arsenal/opengunstore
 <span class="tp">$ </span>cd opengunstore
 <span class="tp">$ </span>docker build --platform linux/amd64 \
-    -f deploy/prod/Dockerfile -t opengunstore:0.1.3 .</pre>
+    -f deploy/prod/Dockerfile -t opengunstore:1.0.1 .</pre>
                 <a class="textlink" href="/docs/self-hosting/">Self-hosting guide</a>
               </div>
               <div class="card">
@@ -440,13 +440,17 @@
             </div>
             <div class="featgrid" data-stagger>
               <div class="feat"><span class="featn">Counter</span><span class="featd">Serial picking, license scanning, order queues</span></div>
-              <div class="feat"><span class="featn">Form 4473</span><span class="featd">Sale is blocked until the 4473 is complete and NICS says Proceed</span></div>
+              <div class="feat"><span class="featn">Form 4473</span><span class="featd">Sale is blocked until the 4473 is complete and NICS says Proceed. Used guns can require a signed agreement</span></div>
               <div class="feat"><span class="featn">Bound book</span><span class="featd">Electronic bound book, synced to FastBound</span></div>
-              <div class="feat"><span class="featn">Payments</span><span class="featd">Payroc terminals, split payments, daily reconciliation</span></div>
+              <div class="feat"><span class="featn">Payments</span><span class="featd">Payroc terminals, several card readers, saved cards, split payments, checks, daily reconciliation</span></div>
               <div class="feat"><span class="featn">Web and auction</span><span class="featd">WooCommerce and GunBroker from one inventory</span></div>
-              <div class="feat"><span class="featn">Distributors</span><span class="featd">RSR and Sports South ordering and drop-ship</span></div>
+              <div class="feat"><span class="featn">Distributors</span><span class="featd">RSR, Sports South and Lipsey's ordering and drop-ship</span></div>
               <div class="feat"><span class="featn">Cash drawer</span><span class="featd">Daily count with variance check</span></div>
               <div class="feat"><span class="featn">Back room</span><span class="featd">Consignment, trade-ins, stock counts, storage map</span></div>
+              <div class="feat"><span class="featn">Memberships</span><span class="featd">Plans, member prices, renewal follow-up</span></div>
+              <div class="feat"><span class="featn">Pre-orders</span><span class="featd">Take full payment or a deposit, deliver when stock arrives</span></div>
+              <div class="feat"><span class="featn">Gunsmithing</span><span class="featd">Work orders from intake to pickup</span></div>
+              <div class="feat"><span class="featn">CRM</span><span class="featd">Frappe CRM with team mail, want lists and held guns</span></div>
             </div>
           </div>
         </section>
